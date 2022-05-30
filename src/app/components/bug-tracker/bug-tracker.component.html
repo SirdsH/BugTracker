@@ -1,0 +1,35 @@
+<form class="container">
+  <h1>Bug Management</h1>
+  <h2 class="mt-5">Create a new bug</h2>
+  <div class="d-flex flex-row mt-3">
+    <div class="form-group me-2">
+      <label class="">Bug description</label>
+      <input [(ngModel)]="bug.description" type="text" name="description" class="form-control">
+    </div>
+
+    <div class="form-group me-2">
+      <label>Severity</label>
+      <select [(ngModel)]="bug.selectedSeverity" class="form-select" name="severity">
+        <option>Critical</option>
+        <option>Major</option>
+        <option>Minor</option>
+      </select>
+    </div>
+    <button (click)="createBug()" class="btn btn-primary mt-4 h-50">Submit a new bug</button>
+  </div>
+
+  <h2 class="mt-4">Active Bugs</h2>
+  <ul *ngFor="let bug of getBug()" class="list-group">
+    <li class="list-group-item">{{bug.description}} <strong>{{bug.selectedSeverity}}</strong>
+      <button (click)="fixed(bug)" class="btn btn-success text-end ms-2">Mark as fixed</button>
+    </li>
+  </ul>
+
+  <h2>Inactive Bugs</h2>
+  <ul class="list-group">
+    <li *ngFor="let bug of isFixed()" class="list-group-item"><span class="text-decoration-line-through text-muted">{{bug.description}}</span>
+      <strong class="ms-2">Fixed</strong>
+      <button (click)="fixed(bug)" class="btn btn-danger ms-2">Mark as broken</button>
+    </li>
+  </ul>
+</form>
